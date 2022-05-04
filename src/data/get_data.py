@@ -17,7 +17,7 @@ def get_dataset():
     train_images, test_images = train_images / 255.0, test_images / 255.0
     return (train_images, train_labels), (test_images, test_labels)
 
-def save_test_images(number: int):
+def save_test_images(number: int=12):
     """save a number of test images for testing the API
 
     Parameters
@@ -27,7 +27,7 @@ def save_test_images(number: int):
     """
     (_, _), (test_images, _) = get_dataset()
     for i in range(number):
-        plt.imsave(os.path.join('data/test', f'im_{i}'),test_images[i])
+        plt.imsave(os.path.join('data/test', f'im_{i}.PNG'),test_images[i])
 
 
 if __name__ == '__main__':
