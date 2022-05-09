@@ -12,9 +12,9 @@ google-api-python-client
 google-cloud-storage
 matplotlib 
 tensorflow
-gunicorn
-pillow
-flask
+fastapi
+uvicorn
+
 
 # backwards compatibility
 pathlib2

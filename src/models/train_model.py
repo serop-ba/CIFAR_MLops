@@ -1,8 +1,10 @@
 import tensorflow as tf
-from data import *
+from ..data import *
 from tensorflow.keras import datasets, layers, models
 import matplotlib.pyplot as plt
+import tensorflow.keras as keras
 import os 
+import numpy as np
 
 def get_untrained_model():
     """Get the model to train
@@ -27,8 +29,20 @@ def get_untrained_model():
     return model
 
 
-def train_model(data, epochs):
-    """fetch the dataset and train the model
+def train_model(data:tuple, epochs:int):
+    """Train a model on the data for the specified epochs
+
+    Parameters
+    ----------
+    data : tuple
+        data to train the model
+    epochs : int
+        number of epochs
+
+    Returns
+    -------
+    model: tf.keras.models.Sequential
+        trained model
     """
     (train_images, train_labels), (test_images, test_labels) = data
     model = get_untrained_model()
@@ -42,33 +56,33 @@ def train_model(data, epochs):
     return model
 
 
-def evaluate_model(model, test_images, test_labels):
-    """evaluate a trained model using the test data 
+def evaluate_model(model:tf.keras.models.Sequential, test_images:np.ndarray, test_labels:np.ndarray):
+    """Evaluate a trained model using the test dat
 
     Parameters
     ----------
-    model : _type_
-        _description_
-    test_images : _type_
-        _description_
-    test_labels : _type_
-        _description_
+    model : tf.keras.models.Sequential
+        trained model
+    test_images : np.ndarray
+        test images
+    test_labels : np.ndarray
+        labels of trained images
     """
     test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
     print(f"Test loss: {test_loss} - accuracy: {test_acc}")
 
 
-def save_model(path, model, version):
+def save_model(path:str, model:tf.keras.models.Sequential, version: str):
     """save trained model in savedModel format
 
     Parameters
     ----------
     path : str
-        path to save the model
-    model : _type_
-        _description_
-    version : int
-        version number of the model
+        path to save the model 
+    model : tf.keras.models.Sequential
+        trained model 
+    version : str
+        version of the trained model
     """
 
     export_path = os.path.join(path, str(version))

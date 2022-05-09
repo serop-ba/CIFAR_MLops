@@ -2,17 +2,26 @@ from sklearn.semi_supervised import LabelSpreading
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import numpy as np
 import os
-from visualization import *
+from ..visualization import *
 
 
 def get_test_data():
+    """get the test data saved in data/test
+
+    Returns
+    -------
+    data_imgs: np.ndarray
+        test images
+    labels: np.ndarray
+        test labels
+    """
 
     # Normalize pixel values
     test_datagen = ImageDataGenerator(rescale=1./255)
 
     # Point to the directory with the test images
     val_gen_no_shuffle = test_datagen.flow_from_directory(
-        '/data/test',
+        './data/test',
         target_size=(32, 32),
         batch_size=3,
         class_mode='binary',
@@ -29,7 +38,16 @@ def get_test_data():
     return data_imgs, labels
 
     
-def serve_model(model_path, model_name):
+def serve_model(model_path:str, model_name:str, model_version: str):
+    """_summary_
+
+    Parameters
+    ----------
+    model_path : str
+        model path
+    model_name : str
+        model version
+    """
     # Define an env variable with the path to where the model is saved
     os.environ["MODEL_DIR"] = model_path
     import json
@@ -38,14 +56,14 @@ def serve_model(model_path, model_name):
     data_imgs_list = data_imgs.tolist()
 
     # Create JSON to use in the request
-    data = json.dumps({"instances": data_imgs_list})
     import requests
+    data = json.dumps({"instances": data_imgs_list})
 
     # Define headers with content-type set to json
     headers = {"content-type": "application/json"}
 
     # Capture the response by making a request to the appropiate URL with the appropiate parameters
-    json_response = requests.post(f'http://localhost:8501/v1/models/{model_name}:predict', data=data, headers=headers)
+    json_response = requests.post(f'http://localhost:8501/v1/models/{model_name}/versions/{model_version}:predict', data=data, headers=headers)
 
     # Parse the predictions out of the response
     predictions = json.loads(json_response.text)['predictions']

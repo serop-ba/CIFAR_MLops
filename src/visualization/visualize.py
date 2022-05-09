@@ -1,4 +1,4 @@
-from data import get_dataset
+from ..data import get_dataset
 import matplotlib.pyplot as plt
 import numpy as np
 from tensorflow.keras.preprocessing.image import array_to_img
