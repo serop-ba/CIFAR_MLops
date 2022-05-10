@@ -4,7 +4,8 @@ import tensorflow as tf
 from tensorflow.keras import datasets, layers, models
 import matplotlib.pyplot as plt
 import os
-
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 def get_dataset():
     """Downloads the dataset and normalize it 
     """
