@@ -99,3 +99,9 @@ def save_model(path:str, model:tf.keras.models.Sequential, version: str):
     )
     print('\nSaved model successfully')
 
+def load_model(path):
+    """
+    loads a trained model from a path
+    """
+    model = tf.keras.models.load_model(path)
+    return model

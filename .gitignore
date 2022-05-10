@@ -36,7 +36,8 @@ MANIFEST
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
-
+*.PNG
+models/
 # Unit test / coverage reports
 htmlcov/
 .tox/
