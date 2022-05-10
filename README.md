@@ -9,12 +9,7 @@ Project Organization
     ├── LICENSE
     ├── README.md          <- The top-level README for developers using this project.
     ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
-    │   └── test            <- Test data for testing the API 
-    |   
+    │   └── test            <- Test data for testing the API   
     │
     ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
     │
@@ -48,4 +43,75 @@ Project Organization
 
 --------
 
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+# User Guide
+
+Serving deep learning model thorugh API.
+
+### Installation
+
+Used **fastapi, tensorflow** mainly to create this project. You can use requirements.txt to install appropriate package version. First, create a virtual environment before installing any packages.
+```
+pip install -r requirements.txt
+```
+>Note: The model was trained on Google Colab with GPU support.
+
+### About Project 
+
+This is a demo project where I wanted to learn FastApi. I also wanted to serve the model through an API. FastApi is very light and Flask like framework.
+
+CIFAR10 dataset was used in this project. 
+
+The project was designed in such a way that anyone can clone/download and run the projcet without any tweaking.
+
+### How to run the app
+
+After installing necessary packages, use the following command to run the app from project root directory-
+
+```
+uvicorn app.main:app
+```
+And visit **http://0.0.0.0:81/docs** from your browser. You will be able to see swagger. From there you can upload an image through *predict* endpoint and then you will get a json response.
+
+Use *--reload* argument if you want to change code and see the effect immediately.
+
+>To Run the Test Cases Use *pytest* command from project root directory.
+
+### How to run the app with docker
+
+Make sure you are in the project root directory and you have started docker. Then create docker image using the following command.
+
+```
+docker build -t fastapi-demo .
+```
+After the image is successfully built, run the following commands to run the container.
+
+```
+docker run -p 81:81 fastapi-demo
+```
+And visit **http://0.0.0.0:81/docs** from your browser. You will be able to see swagger. From there you can upload an image through *predict* endpoint and then you will get a json response.
+
+### Model Training and Performance
+
+Model performance wasn't the main focus of this project. So, I didn't try much to improve the model performance.
+
+All the files related to training can be found in the *deep_learning_model/training* folder.
+
+### Personal Feedback About The Project
+- More work on making the project modular is needed.
+
+
+>NOTE: Please, raise issue if you find an area where it needs some improvement.
+
+### Future Plan
+
+This projects isn't upto the production standard at all. I will be updating this periodically.
+
+Though I have plan to work on the following improvements:
+
+- [ ] CI/CD pipeline
+- [ ] Adding experiments tracking
+- [ ] Adding model versioning
+- [ ] Adding Kubeflow pipeline 
+- [ ] Deploying using kubernetes
+- [ ] deploying the project on GCP
+- [ ] Add tracking tools for the project
