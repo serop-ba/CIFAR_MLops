@@ -3,7 +3,7 @@ FROM python:3.8.5-slim
 
 COPY ./data /data
 COPY ./src /src
-COPY ./models /src/models
+COPY ./models /models
 COPY ./requirements.txt /src/requirements.txt
 WORKDIR /src
 
