@@ -1,20 +1,15 @@
-# FROM node:12-alpine as builder
-# COPY ./ui /ui
-# WORKDIR /ui
-# RUN npm ci
-# RUN npm run build
 
-FROM frolvlad/alpine-miniconda3:python3.7
-COPY ./src /app
-COPY ./models /app/models
-COPY ./requirements.txt /app/requirements.txt
-WORKDIR /app
+FROM python:3.8.5-slim
 
+COPY ./data /data
+COPY ./src /src
+COPY ./models /src/models
+COPY ./requirements.txt /src/requirements.txt
+WORKDIR /src
 
-# COPY --from=builder /ui/build ./build
 RUN pip install -r requirements.txt
-# RUN bash ./ui_cd.sh
+
 
 EXPOSE 80
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "app.main:app", "--port", "80", "--host", "0.0.0.0"]

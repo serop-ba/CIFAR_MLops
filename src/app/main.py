@@ -2,10 +2,11 @@ import tensorflow
 from tensorflow.keras.preprocessing import image
 from PIL import Image
 import numpy as np
+from pydantic import BaseModel
 import tensorflow as tf
+from typing import List
 from fastapi import FastAPI, File, UploadFile, HTTPException
 import logging
-from typing import List
 import sys
 import io
 
@@ -19,7 +20,7 @@ classes = ['airplane', 'automobile', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
 
 
-class PredictionResponse:
+class PredictionResponse(BaseModel):
     """
     prediction response of the class 
     """
@@ -43,9 +44,9 @@ def home():
 async def hello():
     return "Hello there"
 
-
-@app.post("/predict/")
-async def predict(file: UploadFile = File(...), response_model=PredictionResponse):
+# 
+@app.post("/predict/", response_model=PredictionResponse)
+async def predict(file: UploadFile = File(...),):
     if file.content_type.startswith('image/') is False:
         raise HTTPException(
             status_code=400, detail=f'File \'{file.filename}\' is not an image.')
