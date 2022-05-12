@@ -65,12 +65,12 @@ The project was designed in such a way that anyone can clone/download and run th
 
 ### How to run the app
 
-After installing necessary packages, use the following command to run the app from project root directory-
+After installing necessary packages,run the main.py to train a model and to donwload a test set.AFter that you can start the server using the following command to run the app from project root directory-
 
 ```
-uvicorn app.main:app
+uvicorn app.main:app --port 5000 --host 0.0.0.0
 ```
-And visit **http://0.0.0.0:81/docs** from your browser. You will be able to see swagger. From there you can upload an image through *predict* endpoint and then you will get a json response.
+And visit **http://0.0.0.0:5000/docs** from your browser. You will be able to see swagger. From there you can upload an image through *predict* endpoint and then you will get a json response. Here you add click on try it yourself and upload a test image from the test directory and get the model's response.
 
 Use *--reload* argument if you want to change code and see the effect immediately.
 
@@ -78,7 +78,7 @@ Use *--reload* argument if you want to change code and see the effect immediatel
 
 ### How to run the app with docker
 
-Make sure you are in the project root directory and you have started docker. Then create docker image using the following command.
+Make sure you are in the project root directory and you have **started docker, trained a model and have downloaded the test data**. Then create docker image using the following command.
 
 ```
 docker build -t fastapi-demo .
@@ -86,9 +86,9 @@ docker build -t fastapi-demo .
 After the image is successfully built, run the following commands to run the container.
 
 ```
-docker run -p 81:81 fastapi-demo
+docker run -p 5000:80 fastapi-demo
 ```
-And visit **http://0.0.0.0:81/docs** from your browser. You will be able to see swagger. From there you can upload an image through *predict* endpoint and then you will get a json response.
+And visit **http://0.0.0.0:5000/docs** from your browser. You will be able to see swagger. From there you can upload an image through *predict* endpoint and then you will get a json response.
 
 ### Model Training and Performance
 

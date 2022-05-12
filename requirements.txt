@@ -84,13 +84,7 @@ sphinxcontrib-jsmath==1.0.1
 sphinxcontrib-qthelp==1.0.3
 sphinxcontrib-serializinghtml==1.1.5
 starlette==0.18.0
-tensorboard==2.8.0
-tensorboard-data-server==0.6.1
-tensorboard-plugin-wit==1.8.1
-tensorflow==2.8.0
-tensorflow-io-gcs-filesystem==0.25.0
-termcolor==1.1.0
-tf-estimator-nightly==2.8.0.dev2021122109
+tensorflow-cpu
 toml==0.10.2
 typing-extensions==4.2.0
 uritemplate==4.1.1
