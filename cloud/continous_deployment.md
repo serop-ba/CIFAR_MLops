@@ -1,6 +1,11 @@
 # User Guid
 
-1. create a new service account 
+1. create a new service account with the following roles:
+    a. Cloud Build Service Account
+    b. Cloud Run Admin
+    c. Cloud Run Service Agent
+    d. Storage Admin
+    
 2. view the email adress of the created service using the following:
 ```
 gcloud iam service-accounts list --project PROJECT_ID
