@@ -32,7 +32,7 @@ class PredictionResponse(BaseModel):
 def load_model():
     # Load classifier from pickle file
     global model
-    model = tf.keras.models.load_model('../models/1')
+    model = tf.keras.models.load_model('../model/1')
 
 
 @app.get("/")
