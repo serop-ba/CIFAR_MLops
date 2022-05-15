@@ -37,7 +37,7 @@ def load_model():
 
 @app.get("/")
 def home():
-    return "Great! The API is working as expected."
+    return "Great! The API is working as expected. Check the /docs extension for making predictions on the model"
 
 
 @app.get("/hello")
