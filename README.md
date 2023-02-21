@@ -1,7 +1,7 @@
 CIFAR_Mlops
 ==============================
 
-A machine learning pipeline that applies best practices of MLops on classification task using the benchmark dataset CIFAR10. This project serves purely to demonstrate my MLops skills for maintaining and developing entire machine learning pipeline from data acquisition to model monitoring from scratch
+A machine learning pipeline that applies best practices of MLops on classification task using the benchmark dataset CIFAR10. This project serves as a basic tutorial for maintaining and developing a machine learning pipeline from data acquisition to model monitoring from scratch
 
 Project Organization
 ------------
@@ -57,7 +57,7 @@ pip install -r requirements.txt
 
 ### About Project 
 
-This is a demo project where I wanted to learn FastApi. I also wanted to serve the model through an API. FastApi is very light and Flask like framework.
+The idea behind this project is to serve a model's predictions throught an api which can then be attached to a frontend webframe for visualizing the results or uploading the input data. To do this, i used FastApi, which is very light and Flask like framework and written in python.
 
 CIFAR10 dataset was used in this project. 
 
@@ -65,12 +65,12 @@ The project was designed in such a way that anyone can clone/download and run th
 
 ### How to run the app
 
-After installing necessary packages,run the main.py to train a model and to donwload a test set.AFter that you can start the server using the following command to run the app from project root directory-
+After installing necessary packages,run the main.py to train a model and to donwload a test set. AFter that you can start the server using the following command to run the app from project root directory:
 
 ```
 uvicorn app.main:app --port 5000
 ```
-And visit **http://127.0.0.1:5000/docs** from your browser. You will be able to see swagger. From there you can upload an image through *predict* endpoint and then you will get a json response. Here you add click on try it yourself and upload a test image from the test directory and get the model's response.
+Then, visit **http://127.0.0.1:5000/docs** from your browser. You will be able to see swagger, which is a built in UI interface that let's you test the functions you just wrote in fastapi. From there you can upload an image through *predict* endpoint and get a json response with the prediction output. Here you add click on try it yourself and upload a test image from the test directory and get the model's response.
 
 Use *--reload* argument if you want to change code and see the effect immediately.
 
