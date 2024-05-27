@@ -1,0 +1,7 @@
+{
+    "devDependencies": {
+      "@semantic-release/exec": "^6.0.3",
+      "semantic-release-plus": "^20.0.0"
+    }
+  }
+  
