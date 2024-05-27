@@ -1,0 +1,57 @@
+---
+name: PPR
+
+# yamllint disable-line
+on:
+  pull_request:
+    types: [opened, reopened]
+    paths-ignore:
+      - 'cloud/**'
+      - 'data/**'
+      - 'docs/**'
+      - 'notebooks/**'
+  push:
+    paths-ignore:
+      - 'cloud/**'
+      - 'data/**'
+      - 'docs/**'
+      - 'notebooks/**'
+
+concurrency: ci-${{ github.ref }}
+
+jobs:
+  
+  prepare-release:
+    uses: ./.github/workflows/semantic-release.yaml
+
+  docker-build:
+    name: Docker build for CIFAR MLOPS
+    runs-on: ubuntu-latest
+    outputs:
+      image_tag: ${{ steps.push-to-prod.outputs.image_tag }}
+    env:
+      MY_MEMORY_LIMIT: 8192MB # Set memory to 8GB, adjust as needed
+
+    permissions:
+      contents: "read"
+      id-token: "write"
+
+    steps:
+      - name: Free up space on runner (deletes Java, Python, Go, Node, ... binaries)
+        run: rm -rf /opt/hostedtoolcache
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t cifar_latest:latest .
+
+  github-release:
+    if: github.ref == 'refs/heads/master' && needs.prepare-release.outputs.release-version != 'dev'
+    uses: ./.github/workflows/github-release.yaml
+    needs:
+      - prepare-release
+      - docker-build
+    with:
+      version: ${{ needs.prepare-release.outputs.release-version }}
+      changelog: ${{ needs.prepare-release.outputs.release-notes }}
