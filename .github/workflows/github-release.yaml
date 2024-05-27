@@ -1,0 +1,38 @@
+---
+name: Github Release
+
+# yamllint disable-line
+on:
+  workflow_call:
+    inputs:
+      version:
+        required: true
+        type: string
+      changelog:
+        required: true
+        type: string
+
+jobs:
+  github-release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Git tag
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: 'refs/tags/v${{ inputs.version }}',
+              sha: context.sha
+            })
+
+      - name: Github release
+        uses: softprops/action-gh-release@v2
+        with:
+          body: ${{ inputs.changelog }}
+          tag_name: v${{ inputs.version }}
