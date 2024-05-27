@@ -22,8 +22,7 @@ concurrency: ci-${{ github.ref }}
 jobs:
   
   prepare-release:
-    uses: ./.github/workflows/semantic-release.yml
-
+    uses: ./.github/workflows/semantic-release.yaml
 
   docker-build:
     name: Docker build for CIFAR MLOPS
