@@ -32,7 +32,7 @@ jobs:
     env:
       MY_MEMORY_LIMIT: 8192MB # Set memory to 8GB, adjust as needed
 
-    permissions:
+    permissions: 
       contents: "read"
       id-token: "write"
 

@@ -1,0 +1,18 @@
+{
+    "branches": [
+      "master"
+    ],
+    "commitPaths": [
+      "."
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      ["@semantic-release/exec", {
+        "prepareCmd": "echo '${nextRelease.version}' > version.txt && echo '${nextRelease.notes.replaceAll('\\'', '\\'\"\\'\"\\'')}' > notes.md"
+      }]
+    ],
+    "skipTag": true,
+    "tagFormat": "v${version}"
+  }
+  
