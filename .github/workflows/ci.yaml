@@ -48,7 +48,7 @@ jobs:
 
   github-release:
     if: github.ref == 'refs/heads/master' && needs.prepare-release.outputs.release-version != 'dev'
-    uses: ./.github/workflows/github-release.yml
+    uses: ./.github/workflows/github-release.yaml
     needs:
       - prepare-release
       - docker-build
